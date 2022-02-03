@@ -12,6 +12,6 @@ app.use(cors())
 app.use('/api/auth', require('./routes/jwtAuth'))
 app.use('/api/dashboard', require('./routes/dashboard'))
 
-app.listen(5000, () => {
-    console.log("Server is running on PORT 5000")
+app.listen(process.env.PORT, () => {
+    console.log("Server is running on PORT "+process.env.PORT)
 })
