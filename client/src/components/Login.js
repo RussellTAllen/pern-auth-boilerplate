@@ -18,7 +18,11 @@ const Login = ({ setAuth }) => {
         try{
             const data = await AuthService.login(inputs)
 
-            console.log(data)
+            if (data.token){
+                localStorage.setItem('token', data.token)
+                setAuth(true)
+            }else
+                alert('Incorrect email/password!')
         }
         catch(err){
             console.error(err.message)

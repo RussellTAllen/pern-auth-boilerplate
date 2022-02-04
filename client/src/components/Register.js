@@ -18,11 +18,11 @@ const Register = ({ setAuth }) => {
 
         try{
             const data = await AuthService.register(inputs)
-            console.log(data)
 
-            localStorage.setItem('token', data.token)
-
+            if (!data) return
+            
             setAuth(true)
+            localStorage.setItem('token', data.token)
         }
         catch(err){
             console.error(err.message)

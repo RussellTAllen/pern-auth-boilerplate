@@ -7,6 +7,7 @@ const Fn = {
         })
         .then(res => res.json())
         .then(data => data)
+        .catch(err => console.log(err))
     },
     login: user => {
         return fetch('/api/auth/login', {
