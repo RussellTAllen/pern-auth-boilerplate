@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import AuthService from './services/AuthService'
 
 //Components
 import Dashboard from './components/Dashboard';
@@ -16,13 +17,7 @@ function App() {
 
   const isAuth = async() => {
     try{
-      const response = await fetch('/api/auth/is-verify', {
-        method: 'GET',
-        headers: { token: localStorage.token }
-      })
-
-      const data = await response.json()
-
+      const data = await AuthService.isVerify()
       data === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
     }
     catch(err){
