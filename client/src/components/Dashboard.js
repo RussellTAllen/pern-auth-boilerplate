@@ -3,19 +3,21 @@ import React, { useState, useEffect } from 'react'
 const Dashboard = ({ setAuth }) => {
     const [name, setName] = useState('')
 
-    const getName = async () => {
-        try{
-            const response = await fetch('/api/dashboard', {
+    const getName = () => {
+        fetch('/api/dashboard', {
                 method: 'GET',
                 headers: { token: localStorage.token }
             })
-            const data = await response.json()
-
-            setName(data.user_name)
-        }
-        catch(err){
-            console.error(err.message)
-        }
+            .then(response => response.json())
+            .then(data => {
+                if (data === "Not Authorized")
+                    setAuth(false)
+                else{
+                    setName(data.user_name)
+                    setAuth(true)
+                }
+            })
+            .catch(err => console.error(err.message))
     }
     
     useEffect(() => {

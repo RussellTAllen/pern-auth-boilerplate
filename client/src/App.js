@@ -18,6 +18,14 @@ function App() {
   const isAuth = async() => {
     try{
       const data = await AuthService.isVerify()
+
+      // const response = await fetch('/api/auth/is-verify', {
+      //   method: 'GET',
+      //   headers: { token: localStorage.token }
+      // })
+
+      // const data = await response.json()
+
       data === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
     }
     catch(err){
