@@ -3,6 +3,9 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import AuthService from './services/AuthService'
 
+//Mantine Components
+import { Container } from '@mantine/core';
+
 //Components
 import Home from './components/Home';
 import Dashboard from './components/Dashboard';
@@ -39,11 +42,11 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <h1>The App</h1>
+    <Container className="App">
+      {/* <h1>The App</h1> */}
 
       <Router>
-        <div className="container">
+        <Container h="xs">
           <Switch>
             <Route exact path="/">
               <Home />
@@ -67,9 +70,9 @@ function App() {
               )
             } />
           </Switch>
-        </div>
+        </Container>
       </Router>
-    </div>
+    </Container>
   );
 }
 

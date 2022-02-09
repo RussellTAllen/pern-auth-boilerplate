@@ -4,11 +4,12 @@ import Projects from './Projects'
 import Teams from './Teams'
 import Tasks from './Tasks'
 
-import { Tabs, ImageIcon } from '@mantine/core'
+import { Container, Tabs } from '@mantine/core'
 
 
 const Dashboard = ({ setAuth }) => {
     const [name, setName] = useState('')
+    const [activeTab, setActiveTab] = useState(0)
 
     const getName = () => {
         fetch('/api/dashboard', {
@@ -35,46 +36,31 @@ const Dashboard = ({ setAuth }) => {
         setAuth(false)
         localStorage.removeItem('token')
     }
+
+    const handleTabChange = (active, tabKey) => {
+        setActiveTab(active)
+        console.log('tabkey:' +tabKey)
+    }
     
     return (
-        <div>
+        <Container h="xs">
             <h1>{name}'s Dashboard</h1>
-            <button onClick={() => console.log('does this reload the page?')}>Reload???</button>
 
             <button onClick={handleLogout}>Log Out</button>
 
 
-            <Tabs variant="pills">
-                <Tabs.Tab label="Projects">
+            <Tabs variant="pills" active={activeTab} onTabChange={handleTabChange}>
+                <Tabs.Tab label="Projects" tabKey="projects">
                     <Projects />
                 </Tabs.Tab>
-                <Tabs.Tab label="Teams">
-                    <Teams />
-                </Tabs.Tab>
-                <Tabs.Tab label="Tasks">
+                <Tabs.Tab label="Tasks" tabKey="tasks">
                     <Tasks />
+                </Tabs.Tab>
+                <Tabs.Tab label="Teams" tabKey="teams">
+                    <Teams />
                 </Tabs.Tab>
             </Tabs>
-
-            <Link to="/dashboard/projects">Projects</Link>
-            <Link to="/dashboard/teams">Teams</Link>
-            <Link to="/dashboard/tasks">Tasks</Link>
-
-            <Switch>
-                <Route path="/dashboard/projects">
-                    <Projects />
-                </Route>
-                <Route path="/dashboard/teams">
-                    <Teams />
-                </Route>
-                <Route path="/dashboard/tasks">
-                    <Tasks />
-                </Route>
-            </Switch>
-
-
-
-        </div>
+        </Container>
     )
 }
 
