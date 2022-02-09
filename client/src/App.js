@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import AuthService from './services/AuthService'
 
 //Components
+import Home from './components/Home';
 import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -40,9 +41,13 @@ function App() {
   return (
     <div className="App">
       <h1>The App</h1>
+
       <Router>
         <div className="container">
           <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
             <Route path="/login" render={props => !isAuthenticated ? (
               <Login {...props} setAuth={setAuth} /> 
               ) : (
